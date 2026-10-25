@@ -1,0 +1,132 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and metadata",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User unique identifier"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp (FieldValue.serverTimestamp())"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp (FieldValue.serverTimestamp())"
+        }
+      },
+      "required": ["userId", "createdAt"]
+    },
+    "ConversionRecord": {
+      "title": "ConversionRecord",
+      "description": "BDT Number-to-word conversion record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique conversion ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner user ID"
+        },
+        "rawInput": {
+          "type": "string",
+          "description": "Raw numeric input entered by user"
+        },
+        "formattedAmount": {
+          "type": "string",
+          "description": "Formatted Bangladeshi currency amount"
+        },
+        "wordsEnglish": {
+          "type": "string",
+          "description": "Amount converted to English words"
+        },
+        "wordsBangla": {
+          "type": "string",
+          "description": "Amount converted to Bangla words"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["id", "userId", "rawInput", "formattedAmount", "wordsEnglish", "wordsBangla", "createdAt"]
+    },
+    "DocumentMeta": {
+      "title": "DocumentMeta",
+      "description": "Saved PDF or scanned document metadata",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique document ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner user ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Document filename or title"
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "MIME type (application/pdf or image/jpeg)"
+        },
+        "pageCount": {
+          "type": "integer",
+          "description": "Total page count"
+        },
+        "fileSize": {
+          "type": "integer",
+          "description": "File size in bytes"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["id", "userId", "title", "mimeType", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile collection"
+    },
+    "/users/{userId}/conversions/{conversionId}": {
+      "schema": "ConversionRecord",
+      "description": "Cloud-synced conversions for a user"
+    },
+    "/users/{userId}/documents/{docId}": {
+      "schema": "DocumentMeta",
+      "description": "Cloud-synced document metadata for a user"
+    }
+  }
+}

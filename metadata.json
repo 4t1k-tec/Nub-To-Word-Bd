@@ -1,0 +1,6 @@
+{
+  "name": "Nub To Word BDT",
+  "description": "Premium Nothing-inspired Number-to-Word BDT utility, document scanner, A4 PDF creator, and Casio calculator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
